@@ -27,8 +27,10 @@ let makeContainer = text => {
   content;
 };
 
-/* ReactDOMRe.render(<Router />, makeContainer("Tchat")); */
-ReactDOMRe.render(<DisplayMessages />, makeContainer("Messages"));
+/* ReactDOMRe.render(<DisplayMessages />, makeContainer("Messages"));
+ReactDOMRe.render(<InputMessage />, makeContainer("Envoyer un message")); */
+ReactDOMRe.render(<Pokemon />, makeContainer("Pokemon"));
+
 
 /* 
 // All 4 examples.

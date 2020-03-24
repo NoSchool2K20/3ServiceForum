@@ -2,6 +2,7 @@
 
 var React = require("react");
 var ReactDom = require("react-dom");
+var InputMessage$ReasonReactExamples = require("./InputMessage/InputMessage.bs.js");
 var ExampleStyles$ReasonReactExamples = require("./ExampleStyles.bs.js");
 var DisplayMessages$ReasonReactExamples = require("./DisplayMessages/DisplayMessages.bs.js");
 
@@ -26,6 +27,8 @@ function makeContainer(text) {
 }
 
 ReactDom.render(React.createElement(DisplayMessages$ReasonReactExamples.make, { }), makeContainer("Messages"));
+
+ReactDom.render(React.createElement(InputMessage$ReasonReactExamples.make, { }), makeContainer("Envoyer un message"));
 
 exports.style = style;
 exports.makeContainer = makeContainer;
