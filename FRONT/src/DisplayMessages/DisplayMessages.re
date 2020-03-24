@@ -4,10 +4,10 @@
 let make = _ => {
     
     let numbers = ["message 1", "Message 2", "Message 3"];
-    /* let listItems = numbers.map((number) =>
+    let listItems = numbers.map((number) =>
       <li>{number}</li>
     );
-    ReactDOM.render(<ul>{listItems}</ul>); */
+    ReactDOM.render(<ul>{listItems}</ul>);
 
   /* <div>
         (ReasonReact.arrayToElement(
