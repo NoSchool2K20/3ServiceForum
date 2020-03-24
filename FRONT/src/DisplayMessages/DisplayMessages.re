@@ -3,8 +3,8 @@
 [@react.component]
 let make = _ => {
 
-      ([1,2,3])
-    -> Belt.List.map( (num) => <div> {num -> string_of_int -> ReasonReact.string} </div>)
+      (["Message 1","Message 2","Message 3"])
+    -> Belt.List.map( (num) => <div> {ReasonReact.string(num)} </div>)
     -> Belt.List.toArray
     -> ReasonReact.array
 };
