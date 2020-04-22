@@ -29,7 +29,13 @@
     "reason-react": ">=0.7.0",
     "reason-urql": "^1.5.0",
     "urql": "^1.8.2",
-    "webpack": "^4.41.5"
+    "webpack": "^4.41.5",
+    "body-parser": "^1.18.3",
+    "bs-express": "^0.8.0",
+    "@glennsl/bs-json": "^5.0.2",
+    "express": "^4.16.3",
+    "passport": "^0.4.0",
+    "socketio": "^1.0.0"
   },
   "devDependencies": {
     "bs-platform": "^6",

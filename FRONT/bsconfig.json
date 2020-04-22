@@ -16,7 +16,9 @@
   "namespace": true,
   "bs-dependencies": [
     "reason-react",
-    "reason-urql"
+    "reason-urql",
+	 "bs-express",
+   "@glennsl/bs-json"
   ],
   "ppx-flags": ["@baransu/graphql_ppx_re/ppx6"],
   "refmt": 3
