@@ -27,9 +27,9 @@ let makeContainer = text => {
   content;
 };
 
-/* ReactDOMRe.render(<DisplayMessages />, makeContainer("Messages"));
-ReactDOMRe.render(<InputMessage />, makeContainer("Envoyer un message")); */
-ReactDOMRe.render(<Pokemon />, makeContainer("Pokemon"));
+ReactDOMRe.render(<DisplayMessages />, makeContainer("Messages"));
+ReactDOMRe.render(<InputMessage />, makeContainer("Envoyer un message"));
+/*ReactDOMRe.render(<Pokemon />, makeContainer("Pokemon"));*/
 
 
 /* 
