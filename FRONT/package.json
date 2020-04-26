@@ -13,8 +13,8 @@
   "devDependencies": {
     "bs-platform": "^4.0.18",
     "bsb-js": "^1.1.7",
-    "parcel-bundler": "^1.11.0",
-    "sass": "^1.17.0"
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.26.5"
   },
   "dependencies": {
     "@glennsl/bs-json": "^3.0.0",
