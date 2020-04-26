@@ -3,7 +3,6 @@ Random.self_init();
 /* a piece of the global state
    this component is 'interested' in*/
 type ctx = {
-  isLoading: bool,
   results: Root.list_of_repos,
 };
 

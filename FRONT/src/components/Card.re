@@ -12,7 +12,7 @@ external down : string = "default";
 
 let component = ReasonReact.statelessComponent("Card");
 let message = ReactDOMRe.Style.make(~marginTop="10px", ~padding="10px",
-~float="right",~width="400px",~clear="right",~size="200px",~marginRight="10%", ~border="1px solid grey", 
+~float="right",~width="430px",~clear="right",~size="200px",~marginRight="5%", ~border="1px solid grey", 
 ~borderRadius="8px",~overflow="hidden", ());
 let pied = ReactDOMRe.Style.make(~fontSize="12px",~marginLeft="5%",~float="left",~clear="left",());
 let img=ReactDOMRe.Style.make(~float="left",~clear="left", ~width="50px",

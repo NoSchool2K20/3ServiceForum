@@ -1,7 +1,23 @@
-
+[@bs.module "../img/user.png"]
+external logo : string = "default";
 type ctx = {input: string,utilisateur:string};
+let bouton=ReactDOMRe.Style.make(~float="right",~clear="right",
+~textDecoration="none",
+    ~fontWeight= "bold",
+    ~fontSize="18px",
+    ~color="#799dec",
+    ~border="none",
+    ~backgroundColor="white",
+    ~textShadow="0px 4px 2px rgba(0, 0, 0, 0.32), 0px 1px 0px #6182ca, 0px 2px 0px #4f6aa7, 0px 3px 0px #5470ad",());
+let image=ReactDOMRe.Style.make(
+  ~visibility="hidden",
+  ~height="1px",
+  ~width="1px",  ());
 
-
+  let title=ReactDOMRe.Style.make(
+  ~fontSize= "xxx-large",
+  ~textAlign="center",
+    ());
 let component = ReasonReact.statelessComponent("Form");
 
 module Styles = {
@@ -20,6 +36,7 @@ let make = (~ctx: ctx, ~appSend, _children) => {
   ...component,
   render: _self =>
     <form
+    
       onSubmit={
         ev => {
           ReactEvent.Form.preventDefault(ev);
@@ -27,7 +44,18 @@ let make = (~ctx: ctx, ~appSend, _children) => {
           appSend(Root.Search);
         }
       }>
-      <label htmlFor="search"> {ReasonReact.string("Search")} </label>
-           <button type_="submit"> {ReasonReact.string("Submit Search")} </button>
+      <h1 style=title> {ReasonReact.string("Forum "++ ctx.input)} </h1>
+           <button style=bouton type_="submit"> {ReasonReact.string("Refresh")} </button>
+           <img 
+           style=image
+           src=logo
+           alt= ""
+           onLoad={
+            ev => {
+              appSend(Root.UpdateInput({ctx.input},{ctx.utilisateur}));
+              appSend(Root.Search);
+            }
+          }
+           />
     </form>,
 };

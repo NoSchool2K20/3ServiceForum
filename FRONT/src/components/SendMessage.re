@@ -10,7 +10,7 @@ success:json |> field("success",string),
 
    let component = ReasonReact.statelessComponent("SendMessage");
    let message = ReactDOMRe.Style.make(~marginTop="10px", ~padding="10px",
-~float="right",~width="400px",~clear="right",~size="200px",~marginRight="10%", ~border="1px solid grey", 
+~float="right",~width="430px",~clear="right",~size="200px",~marginRight="5%", ~border="1px solid grey", 
 ~borderRadius="8px",~height="130px",~boxShadow="10px 5px 5px blue", ());
 let bouton=ReactDOMRe.Style.make(~float="right",~clear="right",
 ~textDecoration="none",
@@ -64,7 +64,8 @@ let texte=ReactDOMRe.Style.make(~width="100%",~height="85%",~border="none",());
               )
               |> then_(Fetch.Response.json)
                            |> ignore             
-                   )    
+                   )  
+                     
                     appSend(Root.Search);                   
            }         
          }>
@@ -74,6 +75,8 @@ let texte=ReactDOMRe.Style.make(~width="100%",~height="85%",~border="none",());
            id="search"
            name="search "
            value={ctx.text}
+          
+
            onChange={
              ev => {
                let value = ReactEvent.Form.target(ev)##value;
