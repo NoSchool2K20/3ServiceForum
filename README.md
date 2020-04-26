@@ -1,5 +1,7 @@
 Projet forum
 
+Installer et démarrer la partie back
+
 
 npm install
 
