@@ -73,7 +73,7 @@ let reducer = (action, state) =>
     ReasonReact.Update({...state, isLoading: false, results})
   | Search =>
     ReasonReact.UpdateWithSideEffects(
-      {...state, isLoading: true},
+      {...state, isLoading: false},
       (
         self => {
           let value = self.state.input;

@@ -22,6 +22,6 @@ let make = _children => {
     <div style=divprinc>
       <Form ctx={input:"in", utilisateur:"1"} appSend=send />
       <SendMessage ctx={input:"in", utilisateur:"1",text:state.text} appSend=send />
-      <Results ctx={isLoading: state.isLoading, results: state.results }utilisateur="1" appSend=send/>
+      <Results ctx={ results: state.results }utilisateur="1" appSend=send/>
     </div>,
 };
