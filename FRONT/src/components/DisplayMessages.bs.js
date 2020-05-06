@@ -7,8 +7,8 @@ var Fetch = require("bs-fetch/src/Fetch.js");
 var React = require("react");
 var ReasonReactRouter = require("reason-react/src/ReasonReactRouter.js");
 var Input$ReasonReactExamples = require("./Input.bs.js");
-var Messages$ReasonReactExamples = require("../entity/Messages.bs.js");
 var MessageBloc$ReasonReactExamples = require("./MessageBloc.bs.js");
+var MessagesForFront$ReasonReactExamples = require("../entity/MessagesForFront.bs.js");
 var DisplayMessagesStyle$ReasonReactExamples = require("./DisplayMessagesStyle.bs.js");
 
 var style = document.createElement("style");
@@ -30,7 +30,7 @@ function DisplayMessages(Props) {
                 return prim.json();
               })).then((function (json) {
               Curry._1(setStateMessage, (function (param) {
-                      return List.append(stateMessage, Messages$ReasonReactExamples.Messageslist.fromJson(json));
+                      return List.append(stateMessage, MessagesForFront$ReasonReactExamples.MessagesForFrontlist.fromJson(json));
                     }));
               console.log(stateMessage);
               return Promise.resolve(/* () */0);
@@ -47,16 +47,22 @@ function DisplayMessages(Props) {
                   onClick: (function (param) {
                       return ReasonReactRouter.push("/");
                     })
-                }, "Rafraichir"), stateMessage ? React.createElement("div", {
+                }, "Rafraichir"), React.createElement(Input$ReasonReactExamples.make, {
+                  utilisateur: user,
+                  cours: cours
+                }), stateMessage ? React.createElement("div", {
                     className: "content-main"
                   }, $$Array.of_list(List.map((function (p) {
                               return React.createElement(MessageBloc$ReasonReactExamples.make, {
-                                          texte: Messages$ReasonReactExamples.Messages.getTexte(p),
-                                          auteur: Messages$ReasonReactExamples.Messages.getAuteur(p),
-                                          dateenvoi: Messages$ReasonReactExamples.Messages.getDateEnvoi(p),
-                                          nblikes: Messages$ReasonReactExamples.Messages.getNbLikes(p)
+                                          texte: MessagesForFront$ReasonReactExamples.MessagesForFront.getTexte(p),
+                                          auteur: MessagesForFront$ReasonReactExamples.MessagesForFront.getAuteur(p),
+                                          dateenvoi: MessagesForFront$ReasonReactExamples.MessagesForFront.getDateEnvoi(p),
+                                          nblikes: MessagesForFront$ReasonReactExamples.MessagesForFront.getNbLikes(p),
+                                          idMessage: MessagesForFront$ReasonReactExamples.MessagesForFront.getIdMessage(p),
+                                          isLiked: MessagesForFront$ReasonReactExamples.MessagesForFront.isLiked(p),
+                                          utilisateur: user
                                         });
-                            }), stateMessage))) : React.createElement("div", undefined, React.createElement("p", undefined, "Aucun message, postez-en un!")), React.createElement(Input$ReasonReactExamples.make, { }));
+                            }), stateMessage))) : React.createElement("div", undefined, React.createElement("p", undefined, "Aucun message, postez-en un!")));
 }
 
 var make = DisplayMessages;

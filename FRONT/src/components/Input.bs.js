@@ -12,6 +12,8 @@ var inputStyle = {
 };
 
 function Input(Props) {
+  var utilisateur = Props.utilisateur;
+  var cours = Props.cours;
   var match = React.useState((function () {
           return "";
         }));
@@ -23,8 +25,8 @@ function Input(Props) {
   var onSubmit = function (e) {
     e.preventDefault();
     var payload = { };
-    payload["idCours"] = "POO";
-    payload["auteur"] = "monUser";
+    payload["idCours"] = cours;
+    payload["auteur"] = utilisateur;
     payload["texte"] = name;
     fetch("https://service-forum.cleverapps.io/message", Fetch.RequestInit.make(/* Post */2, {
                     "Content-Type": "application/json"

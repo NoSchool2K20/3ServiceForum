@@ -1,12 +1,13 @@
 module Messages: {
   type t;
-  let make: (string, string, string, string, string, string) => t;
+  let make: (string, string, string, string, string, string, string) => t;
   let getIdMessage: t => string;
   let getTexte: t => string;
   let getDateEnvoi: t => string;
   let getIdCours: t => string;
   let getAuteur: t => string;
   let getNbLikes : t => string;
+  let getIsLiked : t => string;
   let fromJson: Js.Json.t => t;
   let fromString: string => option(t);
   let toJson: t => Js.Json.t;
@@ -20,9 +21,10 @@ module Messages: {
     idcours: string,
     auteur: string,
     nblikes : string,
+    isLiked : string,
   };
 
-  let make = (idmessage, texte, dateenvoi, idcours, auteur, nblikes) => {idmessage, texte, dateenvoi, idcours, auteur, nblikes};
+  let make = (idmessage, texte, dateenvoi, idcours, auteur, nblikes, isLiked) => {idmessage, texte, dateenvoi, idcours, auteur, nblikes, isLiked};
 
   let transformDate = date => Js.Date.toString(date);
 
@@ -32,6 +34,7 @@ module Messages: {
   let getIdCours = message => message.idcours;
   let getAuteur = message => message.auteur;
   let getNbLikes = message => message.nblikes;
+  let getIsLiked = message => message.isLiked;
 
   let fromJson = json =>
     Json.Decode.{
@@ -41,6 +44,7 @@ module Messages: {
       idcours: json |> field("idcours", string),
       auteur: json |> field("auteur", string),
       nblikes: json |> field("nblikes", string),
+      isLiked: json |> field("isLiked", string),
     };
 
   let fromString = jsonString =>
@@ -58,6 +62,7 @@ module Messages: {
         ("idcours", string(message.idcours)),
         ("auteur", string(message.auteur)),
         ("nblikes", string(message.nblikes)),
+        ("isLiked", string(message.isLiked)),
       ])
     );
   let toString = message => toJson(message) |> Js.Json.stringify;

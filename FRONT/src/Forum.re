@@ -1,10 +1,5 @@
 [@react.component]
-let make = (~token, ~titleCours) => {
+let make = _ => {
 
-  <>
-        <div> 
-          {React.string("Forum")}
-        </div>
-        <DisplayMessages cours=titleCours user=token />
-  </>;
+        <DisplayMessages cours="POO" user="monUser" />
 };

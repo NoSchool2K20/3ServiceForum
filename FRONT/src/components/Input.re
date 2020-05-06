@@ -2,7 +2,7 @@
 let inputStyle = ReactDOMRe.Style.make( ~padding="10px", ~marginTop="30px", ());
 
 [@react.component]
-let make = _ => {
+let make = (~utilisateur, ~cours) => {
     let (name, setName) = React.useState(() => "");
 
     let onChange = (e: ReactEvent.Form.t): unit => {
@@ -13,8 +13,8 @@ let make = _ => {
     let onSubmit = (e: ReactEvent.Form.t): unit => {
       ReactEvent.Form.preventDefault(e);
       let payload=Js.Dict.empty();
-             Js.Dict.set(payload, "idCours", Js.Json.string("POO"));
-             Js.Dict.set(payload, "auteur", Js.Json.string("monUser"));
+             Js.Dict.set(payload, "idCours", Js.Json.string(cours));
+             Js.Dict.set(payload, "auteur", Js.Json.string(utilisateur));
              Js.Dict.set(payload, "texte", Js.Json.string(name));
       Js.Promise.(
               Fetch.fetchWithInit(

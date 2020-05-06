@@ -6,14 +6,15 @@ var Caml_option = require("bs-platform/lib/js/caml_option.js");
 var Json_decode = require("@glennsl/bs-json/src/Json_decode.bs.js");
 var Json_encode = require("@glennsl/bs-json/src/Json_encode.bs.js");
 
-function make(idmessage, texte, dateenvoi, idcours, auteur, nblikes) {
+function make(idmessage, texte, dateenvoi, idcours, auteur, nblikes, isLiked) {
   return /* record */[
           /* idmessage */idmessage,
           /* texte */texte,
           /* dateenvoi */dateenvoi,
           /* idcours */idcours,
           /* auteur */auteur,
-          /* nblikes */nblikes
+          /* nblikes */nblikes,
+          /* isLiked */isLiked
         ];
 }
 
@@ -45,6 +46,10 @@ function getNbLikes(message) {
   return message[/* nblikes */5];
 }
 
+function getIsLiked(message) {
+  return message[/* isLiked */6];
+}
+
 function fromJson(json) {
   return /* record */[
           /* idmessage */Json_decode.field("idmessage", Json_decode.string, json),
@@ -52,7 +57,8 @@ function fromJson(json) {
           /* dateenvoi */Json_decode.field("dateenvoi", Json_decode.string, json),
           /* idcours */Json_decode.field("idcours", Json_decode.string, json),
           /* auteur */Json_decode.field("auteur", Json_decode.string, json),
-          /* nblikes */Json_decode.field("nblikes", Json_decode.string, json)
+          /* nblikes */Json_decode.field("nblikes", Json_decode.string, json),
+          /* isLiked */Json_decode.field("isLiked", Json_decode.string, json)
         ];
 }
 
@@ -95,7 +101,13 @@ function toJson(message) {
                           "nblikes",
                           message[/* nblikes */5]
                         ],
-                        /* [] */0
+                        /* :: */[
+                          /* tuple */[
+                            "isLiked",
+                            message[/* isLiked */6]
+                          ],
+                          /* [] */0
+                        ]
                       ]
                     ]
                   ]
@@ -116,6 +128,7 @@ var Messages = {
   getIdCours: getIdCours,
   getAuteur: getAuteur,
   getNbLikes: getNbLikes,
+  getIsLiked: getIsLiked,
   fromJson: fromJson,
   fromString: fromString,
   toJson: toJson,

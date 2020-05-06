@@ -52,13 +52,13 @@ function isLiked(message) {
 
 function fromJson(json) {
   return /* record */[
-          /* idmessage */Json_decode.field("idmessage", Json_decode.$$int, json),
+          /* idmessage */Json_decode.field("idmessage", Json_decode.string, json),
           /* texte */Json_decode.field("texte", Json_decode.string, json),
           /* dateenvoi */Json_decode.field("dateenvoi", Json_decode.string, json),
           /* idcours */Json_decode.field("idcours", Json_decode.string, json),
           /* auteur */Json_decode.field("auteur", Json_decode.string, json),
-          /* nblikes */Json_decode.field("nblikes", Json_decode.$$int, json),
-          /* isliked */Json_decode.field("isliked", Json_decode.$$int, json)
+          /* nblikes */Json_decode.field("nblikes", Json_decode.string, json),
+          /* isliked */Json_decode.field("isliked", Json_decode.string, json)
         ];
 }
 
@@ -74,7 +74,7 @@ function toJson(message) {
   return Json_encode.object_(/* :: */[
               /* tuple */[
                 "idmessage",
-                String(message[/* idmessage */0])
+                message[/* idmessage */0]
               ],
               /* :: */[
                 /* tuple */[
@@ -99,12 +99,12 @@ function toJson(message) {
                       /* :: */[
                         /* tuple */[
                           "nblikes",
-                          String(message[/* nblikes */5])
+                          message[/* nblikes */5]
                         ],
                         /* :: */[
                           /* tuple */[
                             "isliked",
-                            String(message[/* isliked */6])
+                            message[/* isliked */6]
                           ],
                           /* [] */0
                         ]

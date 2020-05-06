@@ -29,5 +29,15 @@ let style = {j|
   .likes {
     margin-left: auto;
   }
+  .delimg {
+    height: 20px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  .likeimg {
+    margin-left: 55%;
+    height: 20px;
+    cursor: pointer;
+  }
 
 |j};

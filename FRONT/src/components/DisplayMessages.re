@@ -7,7 +7,7 @@ let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= DisplayMessagesStyle.style;
 
-open Messages;
+open MessagesForFront;
 [@react.component]
 let make = (~cours, ~user) => {
   let (stateMessage, setStateMessage) = React.useState(() => []);
@@ -15,7 +15,7 @@ let make = (~cours, ~user) => {
 
   let decodeMessages= json =>
   
-    json |> Messageslist.fromJson
+    json |> MessagesForFrontlist.fromJson
   ;
 
 
@@ -41,6 +41,8 @@ let make = (~cours, ~user) => {
   // Render //
   <div> 
     <button onClick={ _ => ReasonReact.Router.push("/")}>{React.string("Rafraichir")}</button>
+    <Input utilisateur=user cours=cours />
+
   {switch (stateMessage) {
     | [] =>
       <div>
@@ -52,14 +54,18 @@ let make = (~cours, ~user) => {
      (
       React.array(Array.of_list(
           List.map((p) =>
-    <MessageBloc auteur=Messages.getAuteur(p) texte=Messages.getTexte(p) dateenvoi=Messages.getDateEnvoi(p) nblikes=Messages.getNbLikes(p) />
+    <MessageBloc isLiked=MessagesForFront.isLiked(p) 
+    utilisateur=user 
+    idMessage=MessagesForFront.getIdMessage(p) 
+    auteur=MessagesForFront.getAuteur(p) 
+    texte=MessagesForFront.getTexte(p) 
+    dateenvoi=MessagesForFront.getDateEnvoi(p) nblikes=MessagesForFront.getNbLikes(p) />
           , stateMessage)
       ))
     )
      </div>
 
 }}
-<Input />
   </div>
 
 };
