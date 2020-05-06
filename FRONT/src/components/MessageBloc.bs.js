@@ -22,16 +22,28 @@ function MessageBloc(Props) {
   var idMessage = Props.idMessage;
   var isLiked = Props.isLiked;
   var utilisateur = Props.utilisateur;
-  var initialState = /* record */[/* count */Caml_format.caml_int_of_string(nblikes)];
+  var initialState_000 = /* count */Caml_format.caml_int_of_string(nblikes);
+  var initialState_001 = /* hasLiked */isLiked !== "0";
+  var initialState = /* record */[
+    initialState_000,
+    initialState_001
+  ];
   var reducer = function (state, action) {
     if (action) {
-      return /* record */[/* count */state[/* count */0] - 1 | 0];
+      return /* record */[
+              /* count */state[/* count */0] - 1 | 0,
+              /* hasLiked */false
+            ];
     } else {
-      return /* record */[/* count */state[/* count */0] + 1 | 0];
+      return /* record */[
+              /* count */state[/* count */0] + 1 | 0,
+              /* hasLiked */true
+            ];
     }
   };
   var match = React.useReducer(reducer, initialState);
   var dispatch = match[1];
+  var state = match[0];
   var content_del = Caml_obj.caml_equal(auteur, utilisateur) ? React.createElement("img", {
           className: "delimg",
           src: "http://www.myiconfinder.com/uploads/iconsets/256-256-8796bc16719a5e8bbaa44561df7ee979.png",
@@ -47,10 +59,10 @@ function MessageBloc(Props) {
             })
         }) : React.createElement("p", undefined);
   var content_like = Caml_obj.caml_equal(auteur, utilisateur) ? (
-      Caml_obj.caml_equal(isLiked, "0") ? React.createElement("img", {
+      state[/* hasLiked */1] === false ? React.createElement("img", {
               className: "likeimg",
               title: "+1",
-              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/1111px-Love_Heart_symbol.svg.png",
+              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/OOjs_UI_icon_heart.svg/1200px-OOjs_UI_icon_heart.svg.png",
               onClick: (function (param) {
                   Curry._1(dispatch, /* Increment */0);
                   var payload = { };
@@ -66,7 +78,7 @@ function MessageBloc(Props) {
             }) : React.createElement("img", {
               className: "likeimg",
               title: "-1",
-              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/OOjs_UI_icon_heart.svg/1200px-OOjs_UI_icon_heart.svg.png",
+              src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/1111px-Love_Heart_symbol.svg.png",
               onClick: (function (param) {
                   Curry._1(dispatch, /* Decrement */1);
                   var payload = { };
@@ -91,7 +103,7 @@ function MessageBloc(Props) {
                       className: "date"
                     }, dateenvoi), content_del, content_like, React.createElement("p", {
                       className: "likes"
-                    }, String(match[0][/* count */0]))), React.createElement("p", {
+                    }, String(state[/* count */0]))), React.createElement("p", {
                   className: "texte"
                 }, texte));
 }

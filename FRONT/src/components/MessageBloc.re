@@ -3,7 +3,10 @@
 let style = document##createElement("style");
 document##head##appendChild(style);
 style##innerHTML #= MessageBlocStyle.style;
-type state = {count: int};
+type state = {
+    count: int,
+    hasLiked: bool
+};
 
 type action =
   | Increment
@@ -11,13 +14,12 @@ type action =
 
 [@react.component]
 let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilisateur) => {
-    // like : isLiked à add dans initialState dans state
-    let initialState = {count: int_of_string(nblikes)};
+    let initialState = {count: int_of_string(nblikes), hasLiked: {React.string(isLiked)} !== {React.string("0")}};
 
     let reducer = (state, action) => {
     switch (action) {
-    | Increment => {count: state.count + 1}
-    | Decrement => {count: state.count - 1}
+    | Increment => {count: state.count + 1, hasLiked : true}
+    | Decrement => {count: state.count - 1, hasLiked : false}
     };
     };
     let (state, dispatch) = React.useReducer(reducer, initialState);
@@ -41,7 +43,7 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
       };
 
       let like= () => {
-          dispatch(Increment);
+        dispatch(Increment);
         let payload=Js.Dict.empty();
         Js.Dict.set(payload, "idMessage", Json.Encode.int(int_of_string(idMessage)));
         Js.Dict.set(payload, "userId", Js.Json.string({utilisateur}));
@@ -90,15 +92,15 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
 
       let content_like = 
       if ({React.string(auteur)} == {React.string(utilisateur)}) {
-          if ({React.string(isLiked)} == {React.string("0")}) {
+          if (state.hasLiked == false) {
             <img className="likeimg" 
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/1111px-Love_Heart_symbol.svg.png" 
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/OOjs_UI_icon_heart.svg/1200px-OOjs_UI_icon_heart.svg.png" 
             title="+1"
             onClick={ _ => like()}/>
 
           } else {
             <img className="likeimg" 
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/OOjs_UI_icon_heart.svg/1200px-OOjs_UI_icon_heart.svg.png"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Love_Heart_symbol.svg/1111px-Love_Heart_symbol.svg.png"
             title="-1"
             onClick={ _ => dislike()} />
 
