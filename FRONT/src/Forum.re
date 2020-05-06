@@ -1,5 +1,5 @@
 [@react.component]
-let make = _ => {
+let make = (~titleCours, ~user) => {
 
-        <DisplayMessages cours="POO" user="monUser" />
+        <DisplayMessages cours=titleCours user=user />
 };

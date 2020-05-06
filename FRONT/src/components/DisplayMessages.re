@@ -1,6 +1,5 @@
 [@bs.val] external document: Js.t({..}) = "document";
-
-
+let inputStyle = ReactDOMRe.Style.make( ~padding="10px", ~marginTop="30px", ());
 
 
 let style = document##createElement("style");
@@ -8,16 +7,15 @@ document##head##appendChild(style);
 style##innerHTML #= DisplayMessagesStyle.style;
 
 open MessagesForFront;
+
 [@react.component]
 let make = (~cours, ~user) => {
   let (stateMessage, setStateMessage) = React.useState(() => []);
- 
+  let (name, setName) = React.useState(() => "");
 
   let decodeMessages= json =>
-  
     json |> MessagesForFrontlist.fromJson
   ;
-
 
   let getMessagesLists = (cours, user) =>
     Js.Promise.(
@@ -38,11 +36,47 @@ let make = (~cours, ~user) => {
       getMessagesLists(cours, user);
       None;
     });
+
+    // INPUT //
+
+    let onChange = (e: ReactEvent.Form.t): unit => {
+      let value = e->ReactEvent.Form.target##value;
+      setName(value);
+    };
+  
+    let onSubmit = (e: ReactEvent.Form.t): unit => {
+      ReactEvent.Form.preventDefault(e);
+      let payload=Js.Dict.empty();
+       Js.Dict.set(payload, "idCours", Js.Json.string(cours));
+       Js.Dict.set(payload, "auteur", Js.Json.string(user));
+       Js.Dict.set(payload, "texte", Js.Json.string(name));
+        Js.Promise.(
+        Fetch.fetchWithInit(
+          "https://service-forum.cleverapps.io/message",
+          Fetch.RequestInit.make(
+            ~method_=Post,
+            ~body=Fetch.BodyInit.make(Js.Json.stringify(Js.Json.object_(payload))),
+            ~headers=Fetch.HeadersInit.make({"Content-Type": "application/json"}),
+            ()
+          )
+        )
+        |> then_(Fetch.Response.json)
+        |> then_(_ => {
+              setName(_ => "");
+              ReasonReactRouter.push("");
+              Js.Promise.resolve();
+          })
+        |> ignore       
+      )
+    
+    };
   // Render //
   <div> 
-    <button onClick={ _ => ReasonReact.Router.push("/")}>{React.string("Rafraichir")}</button>
-    <Input utilisateur=user cours=cours />
-
+    <form onSubmit>
+      <input style=inputStyle placeholder="Votre message" type_="text"name="name" value=name onChange/>
+      <button type_="submit">{ReasonReact.string("Envoyer")} </button>
+      </form>
+      
   {switch (stateMessage) {
     | [] =>
       <div>
@@ -50,7 +84,7 @@ let make = (~cours, ~user) => {
          <p> {React.string("Aucun message, postez-en un!")} </p>
        </div>
     | _ =>
-    <div  className="content-main">
+    <div  className="content-main" onChange>
      (
       React.array(Array.of_list(
           List.map((p) =>
