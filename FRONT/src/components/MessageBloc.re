@@ -5,25 +5,28 @@ document##head##appendChild(style);
 style##innerHTML #= MessageBlocStyle.style;
 type state = {
     count: int,
-    hasLiked: bool
+    hasLiked: bool,
+    hasdel: bool
 };
 
 type action =
   | Increment
-  | Decrement;
+  | Decrement
+  | Delete;
 
 [@react.component]
 let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilisateur) => {
-    let initialState = {count: int_of_string(nblikes), hasLiked: {React.string(isLiked)} !== {React.string("0")}};
-
+    let initialState = {count: int_of_string(nblikes), hasLiked: {React.string(isLiked)} !== {React.string("0")}, hasdel: false};
     let reducer = (state, action) => {
     switch (action) {
-    | Increment => {count: state.count + 1, hasLiked : true}
-    | Decrement => {count: state.count - 1, hasLiked : false}
+    | Increment => {count: state.count + 1, hasLiked : true, hasdel: false}
+    | Decrement => {count: state.count - 1, hasLiked : false, hasdel: false}
+    | Delete =>  {count: state.count, hasLiked : false, hasdel: true}
     };
     };
     let (state, dispatch) = React.useReducer(reducer, initialState);
     let suppr = () => {
+        dispatch(Delete);
           let payload=Js.Dict.empty();
          Js.Dict.set(payload, "idMessage", Json.Encode.int(int_of_string(idMessage)));
           Js.Promise.(
@@ -38,7 +41,7 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
             )
             |> then_(Fetch.Response.json)
             |> ignore             
-          )    
+          )
                  
       };
 
@@ -58,8 +61,8 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
              )
            )
            |> then_(Fetch.Response.json)
-                        |> ignore             
-                )    
+           |> ignore             
+           )
       };
 
       let dislike= () => {
@@ -108,14 +111,23 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
       } else {
           <p></p>
       };
-    <div className="content">
-    <div className="info">
-    <p className="auteur">{React.string(auteur)}</p> 
-    <p className="date">{React.string(dateenvoi)}</p>
-    content_del
-    content_like
-    <p className="likes">{React.string(string_of_int(state.count))}</p>
-    </div>
-    <p className="texte">{React.string(texte)}</p>
-    </div>
+      let content_mess = 
+      if(state.hasdel == false) {
+        <div className="content">
+        <div className="info">
+        <p className="auteur">{React.string(auteur)}</p> 
+        <p className="date">{React.string(dateenvoi)}</p>
+        content_del
+        content_like
+        <p className="likes">{React.string(string_of_int(state.count))}</p>
+        </div>
+        <p className="texte">{React.string(texte)}</p>
+        </div>;
+      } else {
+          <div></div>
+      };
+
+
+      content_mess
+   
 };
