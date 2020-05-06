@@ -58,7 +58,7 @@ function MessageBloc(Props) {
               return /* () */0;
             })
         }) : React.createElement("p", undefined);
-  var content_like = Caml_obj.caml_equal(auteur, utilisateur) ? (
+  var content_like = Caml_obj.caml_notequal(auteur, utilisateur) ? (
       state[/* hasLiked */1] === false ? React.createElement("img", {
               className: "likeimg",
               title: "+1",

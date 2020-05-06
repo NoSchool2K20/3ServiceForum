@@ -91,7 +91,7 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
       };
 
       let content_like = 
-      if ({React.string(auteur)} == {React.string(utilisateur)}) {
+      if ({React.string(auteur)} != {React.string(utilisateur)}) {
           if (state.hasLiked == false) {
             <img className="likeimg" 
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/OOjs_UI_icon_heart.svg/1200px-OOjs_UI_icon_heart.svg.png" 
