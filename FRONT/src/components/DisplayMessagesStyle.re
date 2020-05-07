@@ -4,8 +4,33 @@
 // constructing a string
 let style = {j|
 .content-main {
-    max-height:300px;
+
     overflow-y: scroll;
+    float:right;
+    clear:right;
+    height: 570px;
+    width: 100%;    
+
+margin-top: 5%;
+}
+.message {
+    marginTop:10px;
+    padding:10px;
+    float:right;
+    width:440px;
+    clear:right;
+    size:200px;
+    margin-right:2%;
+    border:1px solid grey;
+    border-radius:8px;
+    height:80px;
+    box-shadow:10px 5px 5px blue;
+}
+.texte{
+    width:95%;
+    height:80%;
+    border:none;
+    resize:none;
 }
 
 

@@ -1,5 +1,4 @@
 [@bs.val] external document: Js.t({..}) = "document";
-let inputStyle = ReactDOMRe.Style.make( ~padding="10px", ~marginTop="30px", ());
 
 
 let style = document##createElement("style");
@@ -72,8 +71,8 @@ let make = (~cours, ~user) => {
     };
   // Render //
   <div> 
-    <form onSubmit>
-      <input style=inputStyle placeholder="Votre message" type_="text"name="name" value=name onChange/>
+    <form className="message" onSubmit>
+      <textarea className="texte" placeholder="Votre message" type_="text"name="name" value=name onChange/>
       <button type_="submit">{ReasonReact.string("Envoyer")} </button>
       </form>
       

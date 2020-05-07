@@ -114,7 +114,11 @@ let make = (~texte, ~auteur, ~dateenvoi, ~nblikes, ~idMessage, ~isLiked, ~utilis
       let content_mess = 
       if(state.hasdel == false) {
         <div className="content">
+        
         <div className="info">
+        <img className="user" 
+    src="https://upload.wikimedia.org/wikipedia/commons/1/12/User_icon_2.svg"
+ />
         <p className="auteur">{React.string(auteur)}</p> 
         <p className="date">{React.string(dateenvoi)}</p>
         content_del
