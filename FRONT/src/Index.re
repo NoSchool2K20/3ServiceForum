@@ -27,7 +27,7 @@ let makeContainer = text => {
 };
 
 /* ReactDOMRe.render(<Router />, makeContainer("Tchat")); */
-ReactDOMRe.render(<Forum titleCours="POO" user="monUser"/>, makeContainer("Forum"));
+ReactDOMRe.render(<Forum titleCours="POO" user="1"/>, makeContainer("Forum POO"));
 
 /* 
 // All 4 examples.
