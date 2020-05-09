@@ -31,12 +31,27 @@ let make = (~cours, ~user) => {
       |> ignore
     );
 
+    let getMessagesUpdateLists = (cours, user) =>
+    Js.Promise.(
+      Fetch.fetchWithInit("https://service-forum.cleverapps.io/message?cours=" ++ cours ++ "&userId=" ++ user,
+      Fetch.RequestInit.make(~method_=Get, ()),)
+      |> then_(Fetch.Response.json)
+      |> then_(json  => {
+           setStateMessage(_ => decodeMessages(json));
+           Js.log(stateMessage);
+           Js.Promise.resolve();
+         })
+      |> catch(_err
+           => Js.Promise.resolve())
+      |> ignore
+    );
+
     React.useEffect0(() => {
       getMessagesLists(cours, user);
       None;
     });
 
-    // INPUT //
+ 
 
     let onChange = (e: ReactEvent.Form.t): unit => {
       let value = e->ReactEvent.Form.target##value;
@@ -62,14 +77,16 @@ let make = (~cours, ~user) => {
         |> then_(Fetch.Response.json)
         |> then_(_ => {
               setName(_ => "");
-              ReasonReactRouter.push("");
+              getMessagesUpdateLists(cours, user);
               Js.Promise.resolve();
           })
-        |> ignore       
+         
+        |> ignore     
       )
-    
+       
     };
-  // Render //
+
+
   <div> 
     <form className="message" onSubmit>
       <textarea className="texte" placeholder="Votre message" type_="text"name="name" value=name onChange/>
@@ -79,11 +96,29 @@ let make = (~cours, ~user) => {
   {switch (stateMessage) {
     | [] =>
       <div>
-
-         <p> {React.string("Aucun message, postez-en un!")} </p>
+    <br></br>
+         <p className="info"> {React.string("Aucun message, postez-en un!")} </p>
        </div>
     | _ =>
     <div  className="content-main" onChange>
+    <button  onClick={
+      ev => {
+        Js.Promise.(
+          Fetch.fetchWithInit("https://service-forum.cleverapps.io/message?cours=" ++ cours ++ "&userId=" ++ user,
+          Fetch.RequestInit.make(~method_=Get, ()),)
+          |> then_(Fetch.Response.json)
+          |> then_(json  => {
+               setStateMessage(_ => decodeMessages(json));
+               Js.log(stateMessage);
+               Js.Promise.resolve();
+             })
+          |> catch(_err
+               => Js.Promise.resolve())
+          |> ignore
+        );
+      }
+    }>
+    {ReasonReact.string("raffraichir")} </button>
      (
       React.array(Array.of_list(
           List.map((p) =>
@@ -102,9 +137,3 @@ let make = (~cours, ~user) => {
   </div>
 
 };
-/*
-          <div > 
-            <p>{React.string(Messages.getTexte(p))}</p>
-            <p> {React.string(Messages.getAuteur(p))} </p>
-          </div>
-          */
