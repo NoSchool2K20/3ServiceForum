@@ -25,10 +25,9 @@ Elle répond aux user-story listées ci-dessous:
 
 ## Intégration du projet en forme de composant
 
+****<Forum titleCours={channel} user={token}/>***
 
- ****<Forum titleCours={channel} user={token}/>****
 
- 
 ## Exécution du projet en localhost
 
 Ce projet, bien qu'il soit intégré comme composant, peut aussi être testé en localhost:
