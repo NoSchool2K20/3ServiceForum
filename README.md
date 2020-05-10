@@ -6,7 +6,10 @@
 
 Ce projet s'inscrit dans la démarche du projet NoSchool qui a pour objectif de créer une plateforme de formation qualifiante en informatique à distance.
 Cette partie traite de la partie Front du service Forum. 
-Elle répond aux user-story listées ci-dessous:
+Le wiki est dispobile à l'adresse suivante : 
+https://github.com/NoSchool2K20/3ServiceForum/wiki/Service-Forum---FRONT
+
+L'application répond aux user-story listées ci-dessous:
 
  
 ## User Stories
