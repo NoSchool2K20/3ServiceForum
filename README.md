@@ -50,6 +50,10 @@ Exécuter le lanceur du projet défini dans le package.json sur le port 8000
 
 `npm run dev`
 
+Se connecter sur 
+
+`http://localhost:8000`
+
 Pour lancer les tests Cypress, ouvrez un second terminal et saisissez :
 
 `npm run cypress:open`
