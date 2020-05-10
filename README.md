@@ -32,6 +32,7 @@ Elle répond aux user-story listées ci-dessous:
 
 Ce projet, bien qu'il soit intégré comme composant, peut aussi être testé en localhost:
 
+Rendez-vous dans le dossier FRONT, puis ouvrez un terminal. 
 
 Installer les dépendances du projet dans un dossier node_modules local. 
 
@@ -44,6 +45,9 @@ Exécuter la construction du projet à partir du package.json.
 Exécuter le lanceur du projet défini dans le package.json sur le port 8000
 
 `npm run dev`
+
+Pour lancer les tests Cypress, ouvrez un second terminal et saisissez :
+`npm run cypress:open`
 
 ## WIKI
 
