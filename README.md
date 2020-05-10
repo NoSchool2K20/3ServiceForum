@@ -54,9 +54,6 @@ Pour lancer les tests Cypress, ouvrez un second terminal et saisissez :
 
 `npm run cypress:open`
 
-## WIKI
-
-Vous trouverez un wiki ici: https://github.com/NoSchool2K20/3ServiceForum/wiki/Service-Forum---FRONT
 
 
 
