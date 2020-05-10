@@ -1,0 +1,37 @@
+{
+  "name": "hubme",
+  "version": "0.1.0",
+  "scripts": {
+    "build": "bsb -make-world",
+    "dev": "concurrently -c magenta,cyan \"npm:watch\" \"npm:server\"",
+    "watch": "bsb -make-world -w -ws _ ",
+    "clean": "bsb -clean-world",
+    "bundle": "webpack",
+    "server": "moduleserve ./ --port 8000 --spa",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cypress:open": "cypress open"
+  },
+  "keywords": [
+    "BuckleScript",
+    "ReasonReact",
+    "reason-react"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@glennsl/bs-json": "^3.0.0",
+    "bs-fetch": "^0.5.1",
+    "bsb": "0.0.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "reason-react": ">=0.7.0",
+    "webpack": "^4.41.5"
+  },
+  "devDependencies": {
+    "bs-platform": "^6",
+    "concurrently": "^5.1.0",
+    "cypress": "^3.8.3",
+    "moduleserve": "^0.9.0",
+    "webpack-cli": "^3.3.10"
+  }
+}
