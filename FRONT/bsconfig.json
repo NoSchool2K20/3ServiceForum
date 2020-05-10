@@ -1,24 +1,22 @@
 {
-  "name": "gitsearch",
+  "name": "reason-react-examples",
   "reason": {
-    "react-jsx": 2
+    "react-jsx": 3
   },
   "sources": {
-    "dir": "src",
-    "subdirs": true
+    "dir" : "src",
+    "subdirs" : true
   },
-  "package-specs": [
-    {
-      "module": "es6",
-      "in-source": true
-    }
-  ],
+  "bsc-flags": ["-bs-super-errors", "-bs-no-version-header"],
+  "package-specs": [{
+    "module": "commonjs",
+    "in-source": true
+  }],
   "suffix": ".bs.js",
   "namespace": true,
-  "bs-dependencies": ["reason-react", "bs-css", "bs-fetch", "@glennsl/bs-json"],
-  "refmt": 3,
-  "warnings": {
-    "error": "+5"
-  },
-  "bsc-flags": ["-bs-super-errors"]
+  "bs-dependencies": [
+    "reason-react",
+    "bs-fetch", "@glennsl/bs-json"
+  ],
+  "refmt": 3
 }
